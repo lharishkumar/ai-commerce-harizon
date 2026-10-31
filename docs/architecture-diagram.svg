@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title description">
+  <title id="title">HARIZON Commerce project architecture</title>
+  <desc id="description">Architecture diagram showing the shopper storefront, FastAPI backend, PostgreSQL, optional Auth0 and Razorpay, and the LiveKit voice assistant with Deepgram and OpenAI.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#62748a"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#0f8b8d"/>
+    </marker>
+    <style>
+      text { font-family: Aptos, "Segoe UI", Arial, sans-serif; fill: #172b4d; }
+      .title { font-size: 34px; font-weight: 700; }
+      .subtitle { font-size: 16px; fill: #62748a; }
+      .heading { font-size: 20px; font-weight: 700; }
+      .body { font-size: 15px; fill: #40536b; }
+      .small { font-size: 13px; fill: #62748a; }
+      .node { stroke-width: 2; rx: 16; }
+      .flow { fill: none; stroke: #62748a; stroke-width: 3; marker-end: url(#arrow); }
+      .voice-flow { fill: none; stroke: #0f8b8d; stroke-width: 3; marker-end: url(#arrowTeal); }
+      .optional { fill: none; stroke: #8a75c2; stroke-width: 2.5; stroke-dasharray: 8 7; marker-end: url(#arrow); }
+      .label { font-size: 13px; font-weight: 600; fill: #52657d; }
+      .voice-label { font-size: 13px; font-weight: 600; fill: #0f7476; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#f7f9fc"/>
+  <text x="64" y="66" class="title">HARIZON Commerce — Project Architecture</text>
+  <text x="64" y="96" class="subtitle">Web storefront, commerce services, payments, and real-time voice support</text>
+
+  <!-- Core request flow -->
+  <path class="flow" d="M290 245 H350"/>
+  <path class="flow" d="M650 245 H720"/>
+  <path class="flow" d="M1080 245 H1195"/>
+  <text x="298" y="230" class="label">browse / shop</text>
+  <text x="658" y="230" class="label">REST API</text>
+  <text x="1092" y="230" class="label">SQL</text>
+
+  <rect x="60" y="170" width="230" height="150" class="node" fill="#ffffff" stroke="#cbd5e1"/>
+  <circle cx="92" cy="205" r="13" fill="#dbeafe"/>
+  <text x="116" y="212" class="heading">Shopper</text>
+  <text x="82" y="252" class="body">Uses the site to discover</text>
+  <text x="82" y="276" class="body">products, check out, and</text>
+  <text x="82" y="300" class="body">get help.</text>
+
+  <rect x="350" y="145" width="300" height="200" class="node" fill="#eaf3ff" stroke="#7ea9df"/>
+  <text x="376" y="184" class="heading">Web Storefront</text>
+  <text x="376" y="214" class="body">Next.js / React · port 3000</text>
+  <line x1="376" y1="232" x2="624" y2="232" stroke="#c7d9f1"/>
+  <text x="376" y="263" class="body">Catalog · cart · checkout</text>
+  <text x="376" y="289" class="body">Account · orders · chat</text>
+  <text x="376" y="315" class="body">Live voice interface</text>
+
+  <rect x="720" y="125" width="360" height="240" class="node" fill="#e9f8f6" stroke="#56aaa0"/>
+  <text x="748" y="166" class="heading">Commerce API</text>
+  <text x="748" y="196" class="body">FastAPI · port 8000</text>
+  <line x1="748" y1="214" x2="1052" y2="214" stroke="#b8e1dc"/>
+  <text x="748" y="246" class="body">Catalog · customers · sessions</text>
+  <text x="748" y="274" class="body">Orders · payments · support</text>
+  <text x="748" y="302" class="body">Auth checks · voice tokens</text>
+  <text x="748" y="338" class="small">Private order access is customer-verified</text>
+
+  <rect x="1195" y="155" width="345" height="180" class="node" fill="#fff5e7" stroke="#e0b15f"/>
+  <text x="1223" y="197" class="heading">PostgreSQL</text>
+  <text x="1223" y="227" class="body">Commerce data store</text>
+  <line x1="1223" y1="245" x2="1510" y2="245" stroke="#f0d7aa"/>
+  <text x="1223" y="276" class="body">Customers · products · orders</text>
+  <text x="1223" y="304" class="body">Payments · support tickets</text>
+
+  <!-- Optional auth and payment providers -->
+  <path class="optional" d="M820 365 V423"/>
+  <path class="optional" d="M1000 365 V423"/>
+  <path class="optional" d="M1080 310 C1130 340 1150 400 1120 445"/>
+  <text x="824" y="403" class="label">sign-in</text>
+  <text x="1020" y="403" class="label">checkout</text>
+
+  <rect x="720" y="430" width="230" height="105" class="node" fill="#f3efff" stroke="#a493d2"/>
+  <text x="748" y="470" class="heading">Auth0</text>
+  <text x="748" y="500" class="body">Optional identity provider</text>
+  <text x="748" y="521" class="small">OIDC sign-in / verified email</text>
+
+  <rect x="980" y="430" width="250" height="105" class="node" fill="#f3efff" stroke="#a493d2"/>
+  <text x="1008" y="470" class="heading">Razorpay</text>
+  <text x="1008" y="500" class="body">Optional payment provider</text>
+  <text x="1008" y="521" class="small">Signed webhook to API</text>
+
+  <!-- Voice support flow -->
+  <rect x="60" y="590" width="1480" height="340" rx="22" fill="#effaf9" stroke="#b2dfda" stroke-width="2"/>
+  <text x="90" y="632" class="heading" fill="#0f7476">Real-time Voice Support (optional)</text>
+  <text x="90" y="658" class="small">Audio is streamed; the browser does not connect directly to the database.</text>
+
+  <path class="voice-flow" d="M500 345 C470 420 385 470 350 700"/>
+  <text x="390" y="470" class="voice-label">join voice room</text>
+  <path class="voice-flow" d="M440 735 H550"/>
+  <path class="voice-flow" d="M840 735 H960"/>
+  <path class="voice-flow" d="M770 680 C800 590 900 570 980 310"/>
+  <text x="451" y="717" class="voice-label">WebRTC audio / data</text>
+  <text x="849" y="717" class="voice-label">audio stream</text>
+  <text x="842" y="580" class="voice-label">catalog / order tools</text>
+
+  <rect x="150" y="685" width="290" height="115" class="node" fill="#ffffff" stroke="#56aaa0"/>
+  <text x="178" y="727" class="heading">LiveKit Cloud</text>
+  <text x="178" y="757" class="body">Secure real-time audio room</text>
+  <text x="178" y="781" class="small">Browser connects with API-issued token</text>
+
+  <rect x="550" y="675" width="290" height="135" class="node" fill="#e9f8f6" stroke="#56aaa0"/>
+  <text x="578" y="718" class="heading">Python Voice Worker</text>
+  <text x="578" y="748" class="body">LiveKit Agents</text>
+  <text x="578" y="776" class="small">Search catalog · explain policy</text>
+  <text x="578" y="798" class="small">Authenticated order lookup</text>
+
+  <rect x="960" y="670" width="250" height="110" class="node" fill="#ffffff" stroke="#56aaa0"/>
+  <text x="988" y="710" class="heading">Deepgram</text>
+  <text x="988" y="740" class="body">Speech recognition (STT)</text>
+  <text x="988" y="763" class="small">Voice input → text</text>
+
+  <rect x="1240" y="670" width="250" height="110" class="node" fill="#ffffff" stroke="#56aaa0"/>
+  <text x="1268" y="710" class="heading">OpenAI</text>
+  <text x="1268" y="740" class="body">Responses model + TTS</text>
+  <text x="1268" y="763" class="small">Assistant reply → speech</text>
+
+  <path class="voice-flow" d="M840 700 C890 650 920 650 960 700"/>
+  <path class="voice-flow" d="M840 770 C980 850 1120 850 1240 770"/>
+  <text x="875" y="672" class="voice-label">transcription</text>
+  <text x="1000" y="852" class="voice-label">AI response / speech</text>
+  <path class="voice-flow" d="M1240 790 C1040 900 690 900 440 790"/>
+  <text x="682" y="910" class="voice-label">spoken response returns to shopper</text>
+
+  <rect x="90" y="850" width="300" height="44" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="108" y="878" class="small">Typed chat uses the Commerce API directly</text>
+
+  <text x="64" y="970" class="small">Solid arrows: primary application flow · Teal arrows: voice flow · Dashed arrows: optional integrations</text>
+</svg>
